@@ -6,7 +6,10 @@ import Add from "./pages/Add"
 import Delete from "./pages/Delete"
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const stored = localStorage.getItem("tasks");
+    return stored ? JSON.parse(stored) : [];
+  });
   return (
     <>
       <BrowserRouter>

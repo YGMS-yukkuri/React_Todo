@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Title from '../components/Title/Title'
 import { Link } from 'react-router-dom'
 import TaskCTRL from '../components/TaskCTRL/TaskCTRL'
 
 export default function Home({ tasks, setTasks }) {
+  const storedTasks = localStorage.getItem("tasks");
+  useEffect(() => {
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+  
   return (
     <>
       <header>
