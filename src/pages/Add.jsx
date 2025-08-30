@@ -13,10 +13,11 @@ export default function Add({ tasks, setTasks }) {
       time: inputs[1].value,
       description: inputs[2].value
     }
-    await addDoc(collection(db, "tasks"), newTask);
+    const docRef = await addDoc(collection(db, "tasks"), newTask);
+    const id = docRef.id;
 
-    setTasks([...tasks, newTask])
-    localStorage.setItem("tasks", JSON.stringify([...tasks, newTask]))
+    setTasks([...tasks, { id, ...newTask }])
+    localStorage.setItem("tasks", JSON.stringify([...tasks, { id, ...newTask }]))
     navigate("/")
   }
   return (

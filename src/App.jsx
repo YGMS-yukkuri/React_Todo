@@ -1,6 +1,8 @@
 import "./app.css"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 import Home from "./pages/Home"
 import Add from "./pages/Add"
 import Delete from "./pages/Delete"
@@ -10,6 +12,20 @@ function App() {
     const stored = localStorage.getItem("tasks");
     return stored ? JSON.parse(stored) : [];
   });
+
+    useEffect(() => {
+    async function fetchTasks() {
+      const querySnapshot = await getDocs(collection(db, "tasks"));
+      const fetchedTasks = querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        id: doc.id
+      }));
+      setTasks(fetchedTasks);
+      localStorage.setItem("tasks", JSON.stringify(fetchedTasks));
+    }
+    fetchTasks();
+  }, []);
+
   return (
     <>
       <BrowserRouter>
