@@ -1,0 +1,19 @@
+.TaskCTRL {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 24px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #eee;
+}
+.TaskLink {
+    text-decoration: underline;
+    color: #0067d4;
+    cursor: pointer;
+    padding: 5px;
+}
+.TaskDelete {
+    text-decoration: underline;
+    color: red;
+    cursor: pointer;
+    padding: 5px;
+}
